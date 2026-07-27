@@ -37,8 +37,8 @@ export default function Hero() {
 
         {/* Main Heading */}
         <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-3 sm:mb-4 animate-slide-up">
-          No <span className="text-emerald-400">Distractions</span>.<br />
-          Just Pure <span className="text-emerald-400">Focus</span>.
+          No <span className="text-emerald-400">Distractions</span><br />
+          Just Pure <span className="text-emerald-400">Focus</span>
         </h1>
 
         {/* Subheading */}
