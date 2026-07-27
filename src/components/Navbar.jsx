@@ -9,7 +9,7 @@ export default function Navbar() {
     const onScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 20)
+          setScrolled(window.scrollY > 50)
           ticking = false
         })
         ticking = true
@@ -35,21 +35,36 @@ export default function Navbar() {
 
   return (
     <header
-      className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200"
-      style={{ boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.04)' : 'none' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm'
+          : 'bg-transparent'
+      }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between" aria-label="Main navigation">
         <a href="#" className="flex items-center gap-3 shrink-0" aria-label="Nav Uday Library — Home">
-          <div className="w-8 h-8 rounded-lg bg-emerald flex items-center justify-center text-white font-bold text-sm tracking-tight">
+          <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm tracking-tight transition-colors ${
+            scrolled ? 'bg-emerald text-white' : 'bg-white/20 text-white backdrop-blur-sm'
+          }`}>
             NU
           </div>
-          <span className="font-semibold text-lg tracking-tight text-ink">Nav Uday Library</span>
+          <span className={`font-semibold text-lg tracking-tight transition-colors ${
+            scrolled ? 'text-ink' : 'text-white'
+          }`}>Nav Uday Library</span>
         </a>
 
         {/* Desktop links */}
         <div className="hidden sm:flex items-center gap-6">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="text-sm font-medium text-slate-500 hover:text-ink transition-colors">
+            <a
+              key={l.href}
+              href={l.href}
+              className={`text-sm font-medium transition-colors ${
+                scrolled
+                  ? 'text-slate-500 hover:text-ink'
+                  : 'text-white/80 hover:text-white'
+              }`}
+            >
               {l.label}
             </a>
           ))}
@@ -58,7 +73,11 @@ export default function Navbar() {
         {/* Hamburger (mobile) */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="sm:hidden p-2 -mr-2 rounded-lg text-slate-500 hover:text-ink hover:bg-slate-100 transition-colors"
+          className={`sm:hidden p-2 -mr-2 rounded-lg transition-colors ${
+            scrolled
+              ? 'text-slate-500 hover:text-ink hover:bg-slate-100'
+              : 'text-white hover:bg-white/10'
+          }`}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
         >
@@ -76,14 +95,14 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="sm:hidden border-t border-slate-200 bg-white/95 backdrop-blur-md">
+        <div className="sm:hidden border-t border-white/10 bg-black/80 backdrop-blur-md">
           <div className="px-4 py-6 space-y-1">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setMenuOpen(false)}
-                className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+                className="block px-3 py-2.5 rounded-lg text-sm font-medium text-white/90 hover:bg-white/10 transition-colors"
               >
                 {l.label}
               </a>

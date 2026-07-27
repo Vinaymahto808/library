@@ -1,154 +1,110 @@
-import { useRef, useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 export default function Hero() {
-  const cardRef = useRef(null)
-  const [tilt, setTilt] = useState({ x: 0, y: 0 })
-  const [mouseInside, setMouseInside] = useState(false)
+  const videoRef = useRef(null)
 
   useEffect(() => {
-    const el = cardRef.current
-    if (!el) return
-
-    const handleMouse = (e) => {
-      const rect = el.getBoundingClientRect()
-      const x = (e.clientX - rect.left) / rect.width
-      const y = (e.clientY - rect.top) / rect.height
-      setTilt({ x: (x - 0.5) * 12, y: (y - 0.5) * -12 })
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.75
     }
-
-    el.addEventListener('mousemove', handleMouse)
-    el.addEventListener('mouseenter', () => setMouseInside(true))
-    el.addEventListener('mouseleave', () => { setMouseInside(false); setTilt({ x: 0, y: 0 }) })
-    return () => el.removeEventListener('mousemove', handleMouse)
   }, [])
 
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center [perspective:1200px]">
-      {/* Left: Text */}
-      <div className="lg:col-span-5 space-y-6 [transform-style:preserve-3d]">
-        <span
-          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald/10 text-emerald"
-          style={{ transform: `translateZ(30px)` }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald animate-pulse" />
+    <section className="relative w-full h-screen min-h-[650px] overflow-hidden">
+      {/* Background Video */}
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster="/g1.jpeg"
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/video.mp4" type="video/mp4" />
+      </video>
+
+      {/* Dark Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+
+      {/* Content */}
+      <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
+        {/* Badge */}
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 backdrop-blur-md border border-emerald-500/30 mb-6 animate-fade-in">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
           Nav Uday Library — Mathematics & Competition Hub
         </span>
-        <h1
-          className="text-4xl sm:text-5xl font-extrabold tracking-tight text-ink leading-[1.1]"
-          style={{ transform: `translateZ(50px)` }}
-        >
-          <span className="text-emerald">Silence</span> the<br />
-          <span className="text-emerald">Noise</span>.<br />
-          <span className="text-2xl sm:text-3xl text-slate-400 font-semibold">Own Your Preparation</span>
+
+        {/* Main Heading */}
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05] mb-4 animate-slide-up">
+          No <span className="text-emerald-400">Distractions</span><br />
+          Focus on Your <span className="text-emerald-400">Goals</span>
         </h1>
-        <p
-          className="text-base text-slate-500 max-w-md leading-relaxed"
-          style={{ transform: `translateZ(20px)` }}
-        >
-          Premium, distraction-free study cabins and comprehensive exam resources engineered for serious Class 11&ndash;12, Railway, SSC CGL, CHSL, and JEE aspirants.
+
+        {/* Subheading */}
+        <p className="text-lg sm:text-xl text-white/60 max-w-xl leading-relaxed mb-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          Stop worrying about loud environments at home. Get your own personal study cabin with high-speed Wi-Fi, air conditioning, and complete test prep resources for SSC, Railway, JEE, and Board exams.
         </p>
-        <div
-          className="flex flex-wrap gap-4"
-          style={{ transform: `translateZ(40px)` }}
-        >
-          <a href="#contact" className="px-5 py-2.5 bg-emerald text-white font-medium rounded-lg text-sm hover:bg-[#0D635C] shadow-sm transition-all">
-            Reserve Your Private Cabin
+
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap gap-4 justify-center mb-12 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <a
+            href="#contact"
+            className="group px-7 py-3.5 bg-emerald-500 text-white font-semibold rounded-xl text-sm hover:bg-emerald-600 shadow-xl shadow-emerald-500/30 transition-all duration-300 hover:scale-105 flex items-center gap-2"
+          >
+            Book Your Seat Today
+            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
           </a>
-          <a href="#" className="px-5 py-2.5 bg-white text-slate-700 border border-slate-200 font-medium rounded-lg text-sm hover:bg-slate-50 transition-all">
-            View Flexible Memberships
+          <a
+            href="#"
+            className="px-7 py-3.5 bg-white/10 text-white border border-white/20 font-medium rounded-xl text-sm hover:bg-white/20 backdrop-blur-md transition-all duration-300"
+          >
+            Check Monthly Fees
           </a>
         </div>
 
-        {/* Hero highlights */}
-        <div className="flex flex-col gap-3" style={{ transform: `translateZ(15px)` }}>
+        {/* Feature Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl animate-slide-up" style={{ animationDelay: '0.3s' }}>
           {[
-            { icon: 'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25', text: 'Exam-Ready Environment — Tailored for Railway, SSC CGL, CHSL, and JEE aspirants.' },
-            { icon: 'M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z', text: 'Premium Resources — Comprehensive study materials and silent cabins optimized for results.' },
-            { icon: 'M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719', text: '5,000+ Strong — Join a massive community of serious students tracking toward success.' },
-          ].map((h, i) => (
-            <div key={i} className="flex items-center gap-2.5">
-              <span className="flex w-7 h-7 rounded-md bg-emerald/10 items-center justify-center text-emerald shrink-0">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8">
-                  <path strokeLinecap="round" strokeLinejoin="round" d={h.icon} />
+            {
+              icon: 'M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15',
+              title: 'Personal Study Cabins',
+              desc: 'Silent, comfortable desks with charging points and privacy.',
+            },
+            {
+              icon: 'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25',
+              title: 'Complete Study Resources',
+              desc: 'High-yield books, formula charts, and online test practice sets.',
+            },
+            {
+              icon: 'M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.996.128-1.906.58-2.73 1.262m5.48 8.016c-.39-.072-.786-.11-1.19-.118m-1.2 0a5.965 5.965 0 01-1.2-.118m2.396 1.17c.138-.417.298-.824.478-1.222m-3.956 0c.18.398.34.805.478 1.222m-3.956-1.17c-.39-.072-.786-.11-1.19-.118m1.2 0a5.965 5.965 0 01-1.2-.118',
+              title: 'Proven Local Results',
+              desc: 'Part of a growing community of top performers aiming for dream careers.',
+            },
+          ].map((f, i) => (
+            <div
+              key={i}
+              className="flex flex-col items-center gap-2 p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300"
+            >
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8">
+                  <path strokeLinecap="round" strokeLinejoin="round" d={f.icon} />
                 </svg>
-              </span>
-              <span className="text-xs text-slate-500 leading-snug">{h.text}</span>
+              </div>
+              <h3 className="text-sm font-semibold text-white">{f.title}</h3>
+              <p className="text-xs text-white/50 leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
 
-        {/* Floating book decoration — bottom left */}
-        <div
-          className="absolute -bottom-8 -left-6 w-16 h-20 text-emerald/15 pointer-events-none hidden lg:block"
-          style={{ transform: `translateZ(10px) rotateX(12deg) rotateY(-8deg)` }}
-        >
-          <svg viewBox="0 0 40 48" fill="currentColor" className="w-full h-full">
-            <path d="M8 4a4 4 0 00-4 4v32a4 4 0 004 4h24a4 4 0 004-4V8a4 4 0 00-4-4H8zm0 4h24v28H8V8zm4 4v4h16v-4H12zm0 8v4h16v-4H12zm0 8v4h10v-4H12z" />
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+          <span className="text-xs text-white/40 font-medium">Scroll to explore</span>
+          <svg className="w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
           </svg>
-        </div>
-      </div>
-
-      {/* Right: 3D Tilt Image */}
-      <div className="lg:col-span-7 [transform-style:preserve-3d]">
-        <div
-          ref={cardRef}
-          className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-slate-200 transition-[transform,box-shadow] duration-200 ease-out cursor-pointer"
-          style={{
-            transform: mouseInside
-              ? `rotateX(${tilt.y}deg) rotateY(${tilt.x}deg) scale3d(1.02,1.02,1.02)`
-              : 'rotateX(0deg) rotateY(0deg) scale3d(1,1,1)',
-            boxShadow: mouseInside
-              ? '0 25px 50px -12px rgba(0,0,0,0.25)'
-              : '0 4px 12px rgba(0,0,0,0.08)',
-          }}
-        >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster="/g1.jpeg"
-            className="w-full h-full object-cover"
-          >
-            <source src="/video.mp4" type="video/mp4" />
-          </video>
-
-          {/* Glass reflection overlay */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: mouseInside
-                ? `linear-gradient(${tilt.x + 20}deg, rgba(255,255,255,0.08) 0%, transparent 50%)`
-                : 'none',
-              transition: 'background 0.2s ease',
-            }}
-          />
-
-          {/* Floating 3D book — top right */}
-          <div
-            className="absolute -top-4 -right-4 w-14 h-18 text-white/40 pointer-events-none"
-            style={{
-              transform: `translateZ(40px) rotateY(${mouseInside ? tilt.x * 0.5 : 0}deg)`,
-              transition: 'transform 0.2s ease',
-            }}
-          >
-            <svg viewBox="0 0 36 44" fill="currentColor" className="w-full h-full drop-shadow-lg">
-              <path d="M6 2a4 4 0 00-4 4v32a4 4 0 004 4h24a4 4 0 004-4V6a4 4 0 00-4-4H6zm0 4h24v28H6V6zm2 4v4h20v-4H8zm0 8v4h20v-4H8zm0 8v4h14v-4H8z" />
-            </svg>
-          </div>
-
-          {/* Floating 3D book — bottom right */}
-          <div
-            className="absolute -bottom-3 -right-2 w-10 h-14 text-white/20 pointer-events-none"
-            style={{
-              transform: `translateZ(60px) rotateY(${mouseInside ? tilt.x * -0.7 : -10}deg) rotateX(8deg)`,
-              transition: 'transform 0.2s ease',
-            }}
-          >
-            <svg viewBox="0 0 36 44" fill="currentColor" className="w-full h-full drop-shadow-lg">
-              <path d="M6 2a4 4 0 00-4 4v32a4 4 0 004 4h24a4 4 0 004-4V6a4 4 0 00-4-4H6zm0 4h24v28H6V6zm2 4v4h20v-4H8zm0 8v4h20v-4H8zm0 8v4h14v-4H8z" />
-            </svg>
-          </div>
         </div>
       </div>
     </section>
