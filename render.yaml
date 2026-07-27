@@ -1,0 +1,7 @@
+services:
+  - type: static_site
+    name: nav-uday-library
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    env: static

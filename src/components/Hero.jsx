@@ -58,7 +58,7 @@ export default function Hero() {
             </svg>
           </a>
           <a
-            href="#"
+            href="#contact"
             className="px-7 py-3.5 bg-white/10 text-white border border-white/20 font-medium rounded-xl text-sm hover:bg-white/20 backdrop-blur-md transition-all duration-300"
           >
             Check Monthly Fees
