@@ -26,9 +26,9 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/75" />
 
       <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center py-24 sm:py-20 lg:py-0">
-        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-semibold bg-emerald-500/20 text-emerald-300 backdrop-blur-md border border-emerald-500/30 mb-4 sm:mb-6">
+        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-semibold bg-white/10 text-white backdrop-blur-md border border-white/20 mb-4 sm:mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
-          Nav Uday Library — The Archive
+          Nav Uday Library
         </span>
 
         <h1 className="text-[clamp(1.75rem,5vw,3.5rem)] sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-3">
