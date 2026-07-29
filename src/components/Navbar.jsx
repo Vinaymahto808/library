@@ -45,7 +45,6 @@ export default function Navbar() {
           <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald flex items-center justify-center text-white font-bold text-xs sm:text-sm tracking-tight">
             NU
           </div>
-          <span className="font-semibold text-sm sm:text-lg tracking-tight text-ink hidden xs:inline">Nav Uday Library</span>
         </a>
 
         <div className="flex items-center gap-1.5 sm:gap-3">
