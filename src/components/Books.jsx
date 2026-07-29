@@ -3,26 +3,26 @@ import { Stagger, FadeUp } from './Reveal'
 const BOOKS = [
   {
     title: 'The Deep Study Blueprint',
-    cat: 'Self-Discipline Toolkit & Learning Frameworks',
-    desc: 'Master focus, daily habits, and structured routines. This toolkit is designed to eliminate smartphone distractions and transform how you sustain consistency over long preparation cycles.',
+    cat: 'Self-Discipline Toolkit',
+    desc: 'Eliminate distractions. Build daily focus habits that stick.',
     img: '/g9.jpeg',
   },
   {
     title: 'Core Concepts Master Pack',
-    cat: 'Mathematics & Core Fundamentals',
-    desc: 'Solidify your foundational knowledge. Features crystal-clear concept breakdowns, shortcut techniques, and progressive exercises to take you from basics to advanced problem-solving.',
+    cat: 'Mathematics & Fundamentals',
+    desc: 'Clear concept breakdowns + shortcut techniques for exams.',
     img: '/g10.jpeg',
   },
   {
     title: 'Practice & Progress Series',
-    cat: 'Speed Drills & Exam Preparation',
-    desc: 'Track measurable improvement. Access curated drills, rapid-calculation reviews, and real-world exam challenges tailored specifically for competitive exam patterns.',
+    cat: 'Speed Drills & Exam Prep',
+    desc: 'Curated drills & real exam patterns to boost your speed.',
     img: 'https://images.unsplash.com/photo-1589998059171-988d848dfa2b?w=400&q=85&fit=crop&h=600',
   },
   {
     title: 'Archive Notes: Skills Edition',
-    cat: 'Quick-Reference Materials & Course Packs',
-    desc: 'A high-yield reference vault of pre-assembled learning modules, formula charts, and curated shortcut sheets perfect for last-minute revisions.',
+    cat: 'Quick-Reference Materials',
+    desc: 'Formula charts & shortcut sheets for last-minute revision.',
     img: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&q=85&fit=crop&h=600',
   },
 ]
